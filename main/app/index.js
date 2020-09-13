@@ -1,10 +1,12 @@
 const { getVideo } = require("./video");
 const { triangulation } = require("./triangulation");
 const { getModel, getUVCoords } = require("./facemesh");
-const { createScene, animate, createMask } = require("./scene");
+const { createScene, animate, createMask, loadObject } = require("./scene");
 
 const videoConfig = { height: 400 };
 const modelConfig = { backend: "wasm", maxFaces: 1 };
+
+let hatObject;
 
 function drawMask(mask, faces) {
   if (!faces.length) return;
@@ -22,6 +24,10 @@ function drawMask(mask, faces) {
     positions[index++] = -y;
     positions[index++] = -z;
   });
+
+  if (hatObject) {
+    hatObject.position.set(positions[0], positions[1], positions[2]);
+  }
 
   position.needsUpdate = true;
 
@@ -44,6 +50,16 @@ async function init() {
   mask.position.set(-width / 2, height / 2, 0);
 
   scene.add(mask);
+
+  loadObject({
+    path: "obj/Leather_Hat/",
+    obj: "Leather_Hat.obj",
+    mtl: "Leather_Hat.mtl"
+  }).then(object => {
+    object.scale.set(100, 100, 100);
+    hatObject = object;
+    mask.add(object);
+  });
 
   animate(() => {
     model.estimateFaces(video, false, true).then(draw);

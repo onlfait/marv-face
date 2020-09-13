@@ -1,7 +1,8 @@
-const THREE = require("three");
+const THREE = (window.THREE = require("three"));
 
-window.THREE = THREE;
 require("../../node_modules/three/examples/js/controls/OrbitControls.js");
+require("../../node_modules/three/examples/js/loaders/MTLLoader.js");
+require("../../node_modules/three/examples/js/loaders/OBJLoader.js");
 
 let camera;
 let scene;
@@ -11,6 +12,32 @@ let videoPlan;
 let ambientLight;
 let spotLight;
 let mesh;
+
+function xhrProgress(label, xhr) {
+  const percent = (xhr.loaded / xhr.total) * 100;
+  console.log(`${label}: ${percent} % loaded`);
+}
+
+function loadMaterial({ file, path = null } = {}) {
+  const loader = new THREE.MTLLoader();
+  path && loader.setPath(path);
+  return new Promise((resolve, reject) => {
+    loader.load(file, resolve, xhrProgress.bind(null, "material"), reject);
+  });
+}
+
+function loadObject({ obj, mtl = null, path = null } = {}) {
+  return new Promise(async (resolve, reject) => {
+    const loader = new THREE.OBJLoader();
+    path && loader.setPath(path);
+    if (mtl) {
+      const materials = await loadMaterial({ file: mtl, path });
+      materials.preload();
+      loader.setMaterials(materials);
+    }
+    loader.load(obj, resolve, xhrProgress.bind(null, "object"), reject);
+  });
+}
 
 function fitCameraToObject(object) {
   const boundingBox = new THREE.Box3();
@@ -69,7 +96,7 @@ function createScene({ width, height } = {}) {
 
   //---
   ambientLight = new THREE.AmbientLight(0x555555);
-  spotLight = new THREE.SpotLight(0xffffff, 0.5);
+  spotLight = new THREE.SpotLight(0xffffff, 0.2);
   spotLight.position.set(0, 1000, 5000);
 
   mesh = createCube({ size: 100 });
@@ -94,4 +121,4 @@ function animate(callback) {
   renderer.render(scene, camera);
 }
 
-module.exports = { createScene, createMask, animate, scene };
+module.exports = { createScene, createMask, animate, scene, loadObject };
