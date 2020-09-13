@@ -23,7 +23,7 @@ function fitCameraToObject(object) {
   boundingBox.getCenter(center);
   boundingBox.getSize(size);
 
-  const maxSize = Math.max(size.x, size.y);
+  const maxSize = Math.min(size.x, size.y);
   camera.position.z = maxSize / 2 / Math.tan((Math.PI * camera.fov) / 360);
 }
 
