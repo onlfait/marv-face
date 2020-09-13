@@ -42,6 +42,16 @@ function createCube({ size } = {}) {
   return new THREE.Mesh(geometry, material);
 }
 
+function createMask(maxPoints) {
+  const geometry = new THREE.BufferGeometry();
+  const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+  const buffer = new Float32Array(maxPoints * 3);
+  const position = new THREE.BufferAttribute(buffer, 3);
+  geometry.setAttribute("position", position);
+  geometry.setDrawRange(0, maxPoints);
+  return new THREE.Mesh(geometry, material);
+}
+
 function createScene({ width, height } = {}) {
   scene = new THREE.Scene();
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -55,7 +65,7 @@ function createScene({ width, height } = {}) {
   fitCameraToObject(videoPlan);
 
   scene.add(camera);
-  scene.add(videoPlan);
+  // scene.add(videoPlan);
 
   //---
   ambientLight = new THREE.AmbientLight(0x555555);
@@ -66,13 +76,15 @@ function createScene({ width, height } = {}) {
 
   scene.add(ambientLight);
   scene.add(spotLight);
-  scene.add(mesh);
+  // scene.add(mesh);
   //---
 
   document.body.appendChild(renderer.domElement);
   document.body.addEventListener("dblclick", () => {
     fitCameraToObject(videoPlan);
   });
+
+  return scene;
 }
 
 function animate(callback) {
@@ -82,4 +94,4 @@ function animate(callback) {
   renderer.render(scene, camera);
 }
 
-module.exports = { createScene, animate };
+module.exports = { createScene, createMask, animate, scene };
