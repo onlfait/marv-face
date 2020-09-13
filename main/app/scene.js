@@ -44,7 +44,7 @@ function createCube({ size } = {}) {
 
 function createScene({ width, height } = {}) {
   scene = new THREE.Scene();
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 5000);
   controls = new THREE.OrbitControls(camera, renderer.domElement);
 

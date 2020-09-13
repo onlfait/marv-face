@@ -1,7 +1,14 @@
 const { createScene, animate } = require("./scene");
+const { getVideo } = require("./video");
 
-createScene({ width: 400, height: 400 });
+getVideo({ height: 400 }).then(video => {
+  const { videoWidth: width, videoHeight: height } = video;
 
-animate(() => {
-  console.log("animate...");
+  document.body.appendChild(video);
+
+  createScene({ width, height });
+
+  animate(() => {
+    console.log("animate...");
+  });
 });
