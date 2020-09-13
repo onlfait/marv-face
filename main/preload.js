@@ -1,3 +1,1 @@
-const run = require('./app');
-
-document.addEventListener("DOMContentLoaded", run);
+document.addEventListener("DOMContentLoaded", () => require("./app"));
