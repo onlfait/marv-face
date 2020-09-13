@@ -1,6 +1,6 @@
-const { getModel } = require('./facemesh');
+const { getModel } = require("./facemesh");
 const { getVideo } = require("./getVideo");
-const { getScene } = require('./getScene');
+const { getScene } = require("./getScene");
 
 const videoConfig = { height: 400 };
 const modelConfig = { backend: "wasm", maxFaces: 1 };
@@ -49,4 +49,4 @@ module.exports = async function onDOMContentLoaded() {
   document.body.appendChild(three.element);
 
   render();
-}
+};
