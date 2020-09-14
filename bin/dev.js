@@ -7,7 +7,7 @@ const electron = require("./modules/electron");
 
 const watchPattern = "app/main/**/*";
 const electronArgs = ["app/main/index.js", "--dev"];
-const rollupConfig = path.resolve(__dirname, "rollup.config.js");
+const rollupConfig = path.resolve(__dirname, "config/rollup.js");
 
 let watchReady = false;
 
