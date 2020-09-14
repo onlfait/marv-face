@@ -54,11 +54,13 @@ function fitCameraToObject(object) {
   camera.position.z = maxSize / 2 / Math.tan((Math.PI * camera.fov) / 360);
 }
 
-function createVideoPlan({ width, height } = {}) {
-  const geometry = new THREE.PlaneBufferGeometry(width, height, 32);
+function createVideoPlan({ width, height, video = null } = {}) {
+  const geometry = new THREE.PlaneBufferGeometry(width, height, 1);
+  const texture = video && new THREE.VideoTexture(video);
   const material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
-    color: 0xffff00
+    color: 0xffff00,
+    map: texture
   });
   return new THREE.Mesh(geometry, material);
 }
@@ -79,7 +81,7 @@ function createMask(maxPoints) {
   return new THREE.Mesh(geometry, material);
 }
 
-function createScene({ width, height } = {}) {
+function createScene({ width, height, video = null } = {}) {
   scene = new THREE.Scene();
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 5000);
@@ -88,11 +90,11 @@ function createScene({ width, height } = {}) {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
 
-  videoPlan = createVideoPlan({ width, height });
+  videoPlan = createVideoPlan({ width, height, video });
   fitCameraToObject(videoPlan);
 
   scene.add(camera);
-  // scene.add(videoPlan);
+  scene.add(videoPlan);
 
   //---
   ambientLight = new THREE.AmbientLight(0x555555);
