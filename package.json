@@ -4,14 +4,24 @@
   "license": "MIT",
   "scripts": {
     "dev": "node ./bin/dev",
-    "bundle": "node ./bin/rollup"
+    "build": "node ./bin/build"
+  },
+  "build": {
+    "productName": "Marv face",
+    "icon": "app/static/icon.ico",
+    "files": [
+      "**/*",
+      "!renderer_src"
+    ]
   },
   "dependencies": {
-    "electron": "^10.1.1",
     "electron-store": "^6.0.0"
   },
   "devDependencies": {
     "chokidar": "^3.4.2",
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
+    "fs-extra": "^9.0.1",
     "rollup": "^2.26.11"
   }
 }
