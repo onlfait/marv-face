@@ -9,7 +9,7 @@ const defaultSettings = {
   }
 };
 
-const events = new EventEmitter();
+const ee = new EventEmitter();
 
 export function getCamera(settings = {}) {
   settings = cloneDeep(defaultSettings, settings);
@@ -30,15 +30,15 @@ export function cameraWatcher({ timeout = 2000, ...settings } = {}) {
 
     getCamera(settings)
       .then(camera => {
-        events.emit("camera", camera);
+        ee.emit("camera", camera);
         camera.track.addEventListener("ended", () => {
-          events.emit("ended", camera);
+          ee.emit("ended", camera);
           waitForCamera();
         });
       })
       .catch(error => {
-        events.emit("error", error);
         setTimeout(waitForCamera, timeout);
+        ee.emit("error", error);
       });
   }
 
@@ -51,8 +51,8 @@ export function cameraWatcher({ timeout = 2000, ...settings } = {}) {
     stop() {
       watching = false;
     },
-    on: events.on.bind(events),
-    off: events.off.bind(events),
-    once: events.once.bind(events)
+    on: ee.on.bind(ee),
+    off: ee.off.bind(ee),
+    once: ee.once.bind(ee)
   };
 }
