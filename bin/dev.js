@@ -11,6 +11,8 @@ const rollupConfig = path.resolve(__dirname, "rollup.config.js");
 
 let watchReady = false;
 
+process.argv.push("--dev");
+
 chokidar
   .watch(watchPattern)
   .on("ready", () => {
