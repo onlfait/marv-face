@@ -1,10 +1,9 @@
 {
   "name": "marv-face",
   "version": "0.0.1",
-  "main": "app/main/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "dev": "node ./bin/dev"
   },
   "dependencies": {
     "electron": "^10.1.1",
