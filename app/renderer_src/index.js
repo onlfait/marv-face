@@ -1,10 +1,9 @@
 import { cameraWatcher } from "./modules/camera";
 
-console.log("renderer_src/index.js -> bundle.js");
+const cameraWatch = cameraWatcher();
 
-const watcher = cameraWatcher();
+cameraWatch.on("camera", camera => console.log(">>> camera:", { camera }));
+cameraWatch.on("ended", camera => console.error(">>> ended:", { camera }));
+cameraWatch.on("error", error => console.error(">>> error:", { error }));
 
-watcher.on("camera", camera => console.log(">>> camera:", { camera }));
-watcher.on("error", error => console.error(">>> error:", { error }));
-
-watcher.start();
+cameraWatch.start();
