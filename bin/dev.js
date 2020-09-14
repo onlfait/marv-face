@@ -1,17 +1,25 @@
 #!/usr/bin/env node
+
+const path = require("path");
 const chokidar = require("chokidar");
+const rollup = require("./modules/rollup");
 const electron = require("./modules/electron");
 
 const watchPattern = "app/main/**/*";
 const electronArgs = ["app/main/index.js", "--dev"];
+const rollupConfig = path.resolve(__dirname, "rollup.config.js");
 
 let watchReady = false;
 
 chokidar
   .watch(watchPattern)
   .on("ready", () => {
-    electron.launch(electronArgs);
-    watchReady = true;
+    rollup.events.once("bundle_end", () => {
+      electron.launch(electronArgs);
+      watchReady = true;
+    });
+
+    rollup.run(rollupConfig);
   })
   .on("all", (eventName, path) => {
     if (!watchReady) return;

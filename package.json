@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./bin/dev"
+    "dev": "node ./bin/dev",
+    "bundle": "node ./bin/rollup"
   },
   "dependencies": {
     "electron": "^10.1.1",
     "electron-store": "^6.0.0"
   },
   "devDependencies": {
-    "chokidar": "^3.4.2"
+    "chokidar": "^3.4.2",
+    "rollup": "^2.26.11"
   }
 }

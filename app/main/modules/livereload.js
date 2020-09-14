@@ -1,4 +1,4 @@
-const { app } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const chokidar = require("chokidar");
 
 process.on("message", message => {
@@ -16,6 +16,7 @@ module.exports = function livereload({ win, watch, ...options } = {}) {
     .on("all", (eventName, path) => {
       if (!ready) return;
       console.log(`[livereload] ${eventName} -> ${path}`);
+      console.log(`[livereload] ↻ Window #${win.id}`, win.getTitle());
       win.webContents.reloadIgnoringCache();
     });
 };

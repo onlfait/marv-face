@@ -12,21 +12,21 @@ function send(...args) {
 }
 
 function exit() {
-  console.log(`Exit electron app...`);
+  console.log(`[electron] Exit electron app...`);
   send({ type: "exit", code: 42 });
 }
 
 function launch(args) {
   if (isLaunched()) return;
 
-  console.log("Starting electron app...");
+  console.log("[electron] Starting electron app...");
 
   electronApp = spawn(electron, args, {
     stdio: ["inherit", "inherit", "inherit", "ipc"]
   });
 
   electronApp.on("exit", code => {
-    console.log(`Electron app exited (code: ${code})`);
+    console.log(`[electron] Electron app exited (code: ${code})`);
     electronApp = null;
     if (code === 42) {
       launch(args);
