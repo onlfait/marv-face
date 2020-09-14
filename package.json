@@ -1,12 +1,14 @@
 {
   "name": "marv-face",
   "version": "0.0.1",
+  "main": "app/main/index.js",
   "license": "MIT",
   "scripts": {
     "start": "electron ."
   },
   "dependencies": {
-    "electron": "^10.1.1"
+    "electron": "^10.1.1",
+    "electron-store": "^6.0.0"
   },
   "devDependencies": {
     "chokidar": "^3.4.2"
