@@ -4,7 +4,7 @@ const { spawn } = require("child_process");
 let electronApp = null;
 
 function isLaunched() {
-  return !!electronApp;
+  return electronApp && electronApp.connected;
 }
 
 function send(...args) {
@@ -17,7 +17,7 @@ function exit() {
 }
 
 function launch(args) {
-  if (electronApp) return;
+  if (isLaunched()) return;
 
   console.log("Starting electron app...");
 
