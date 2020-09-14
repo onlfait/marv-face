@@ -1,12 +1,3 @@
-body {
-  background-color: #111;
-}
-
-video,
-canvas {
-  position: absolute;
-}
-
 input[type="file"],
 input[type="file"]::-webkit-file-upload-button {
   cursor: pointer;
