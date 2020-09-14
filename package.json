@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "clone-deep": "^4.0.1",
+    "electron-context-menu": "^2.3.0",
     "electron-store": "^6.0.0",
     "events": "^3.2.0"
   },

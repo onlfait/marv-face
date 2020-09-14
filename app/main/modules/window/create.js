@@ -21,6 +21,7 @@ module.exports = function create() {
 
   isDev && require("../livereload")({ win, watch: "**/*", cwd: rendererPath });
   win.loadFile(path.resolve(rendererPath, "index.html"));
+  isDev && require("electron-context-menu")();
   devTools && win.webContents.openDevTools();
   storeWindow(win, { name: "marv-face" });
 
