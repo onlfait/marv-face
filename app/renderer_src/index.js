@@ -1,9 +1,3 @@
-import { cameraWatcher } from "./modules/camera";
+import App from "./App.svelte";
 
-const cameraWatch = cameraWatcher();
-
-cameraWatch.on("camera", camera => console.log(">>> camera:", { camera }));
-cameraWatch.on("ended", camera => console.error(">>> ended:", { camera }));
-cameraWatch.on("error", error => console.error(">>> error:", { error }));
-
-cameraWatch.start();
+new App({ target: document.body });
