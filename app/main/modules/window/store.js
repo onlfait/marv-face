@@ -1,4 +1,4 @@
-const create = require("../stores/create");
+const create = require("../../stores/create");
 
 const defaults = {
   bounds: {
@@ -7,7 +7,7 @@ const defaults = {
   }
 };
 
-module.exports = function storeWindow(win, { name = null, delay = 500 } = {}) {
+module.exports = function store(win, { name = null, delay = 500 } = {}) {
   const store = create({
     name: name || win.name,
     dir: "stores/windows",

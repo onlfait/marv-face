@@ -1,11 +1,11 @@
-const { isDev, devTools, mainPath, rendererPath } = require("../config");
+const { isDev, devTools, mainPath, rendererPath } = require("../../config");
 const { BrowserWindow } = require("electron");
-const storeWindow = require("./storeWindow");
+const storeWindow = require("./store");
 const path = require("path");
 
 let win;
 
-module.exports = function createWindow() {
+module.exports = function create() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -17,7 +17,7 @@ module.exports = function createWindow() {
     }
   });
 
-  isDev && require("./livereload")({ win, watch: "**/*", cwd: rendererPath });
+  isDev && require("../livereload")({ win, watch: "**/*", cwd: rendererPath });
   win.loadFile(path.resolve(rendererPath, "index.html"));
   devTools && win.webContents.openDevTools();
   storeWindow(win, { name: "marv-face" });
