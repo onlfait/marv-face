@@ -2,3 +2,17 @@ input[type="file"],
 input[type="file"]::-webkit-file-upload-button {
   cursor: pointer;
 }
+
+html,
+body {
+  background: #00ff00;
+  -webkit-app-region: drag;
+}
+
+video {
+  display: none;
+}
+
+canvas {
+  -webkit-app-region: none;
+}

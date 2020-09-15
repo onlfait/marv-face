@@ -10,6 +10,7 @@ module.exports = function create() {
     width: 800,
     height: 600,
     show: false,
+    frame: false,
     webPreferences: {
       devTools,
       nodeIntegration: true,
