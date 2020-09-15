@@ -20,7 +20,7 @@ events.on("bundle_start", ({ input }) => {
 });
 
 events.on("bundle_end", ({ output, duration }) => {
-  output.forEach(item => console.log(`[electron] => ${cleanPath(item)}`));
+  output.forEach(item => console.log(`[rollup] => ${cleanPath(item)}`));
   console.log(`[rollup] Bundling took ${duration} ms`);
 });
 
