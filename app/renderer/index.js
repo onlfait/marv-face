@@ -4,7 +4,7 @@ const { triangulation } = require("./modules/triangulation");
 const { getModel } = require("./modules/facemesh");
 
 const size = { width: 400, height: 400 };
-const modelConfig = { backend: "wasm", maxFaces: 1 };
+const modelConfig = { backend: "webgl", maxFaces: 1 };
 
 const watcher = cameraWatcher({ video: size });
 const $sceneWrapper = document.querySelector("#scene");
