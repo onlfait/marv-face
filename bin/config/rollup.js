@@ -12,12 +12,12 @@ export default {
     format: "iife"
   },
   plugins: [
+    svelte({ dev }),
+    commonjs(),
     resolve({
       dedupe: ["svelte"],
       preferBuiltins: false
     }),
-    commonjs(),
-    svelte({ dev }),
     !dev && terser()
   ]
 };

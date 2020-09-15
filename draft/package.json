@@ -1,0 +1,21 @@
+{
+  "name": "marv-face",
+  "version": "0.0.1",
+  "main": "main/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@tensorflow-models/facemesh": "^0.0.4",
+    "@tensorflow/tfjs-backend-wasm": "^2.3.0",
+    "@tensorflow/tfjs-backend-webgl": "^2.3.0",
+    "@tensorflow/tfjs-converter": "^2.3.0",
+    "@tensorflow/tfjs-core": "^2.3.0",
+    "electron": "^10.1.1",
+    "three": "^0.120.1"
+  },
+  "devDependencies": {
+    "chokidar": "^3.4.2"
+  }
+}

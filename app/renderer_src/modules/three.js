@@ -1,4 +1,4 @@
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
   WebGLRenderer,
   PerspectiveCamera,
@@ -11,7 +11,9 @@ import {
   Mesh,
   DoubleSide,
   AmbientLight,
-  SpotLight
+  SpotLight,
+  MeshPhongMaterial,
+  BufferAttribute
 } from "three";
 
 export function fitCameraToObject(camera, object, controls = null) {
@@ -37,6 +39,16 @@ function createVideoPlan({ width, height, video } = {}) {
     color: 0xffff00,
     map: texture
   });
+  return new Mesh(geometry, material);
+}
+
+export function createMask(maxPoints) {
+  const geometry = new BufferGeometry();
+  const material = new MeshPhongMaterial({ color: 0x00ff00 });
+  const buffer = new Float32Array(maxPoints * 3);
+  const position = new BufferAttribute(buffer, 3);
+  geometry.setAttribute("position", position);
+  geometry.setDrawRange(0, maxPoints);
   return new Mesh(geometry, material);
 }
 
