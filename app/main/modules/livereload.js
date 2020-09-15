@@ -13,7 +13,7 @@ module.exports = function livereload({ win, watch, ...options } = {}) {
   chokidar
     .watch(watch, options)
     .on("ready", () => (ready = true))
-    .on("all", (eventName, path) => {
+    .on("change", (eventName, path) => {
       if (!ready) return;
       console.log(`[livereload] ${eventName} -> ${path}`);
       console.log(`[livereload] ↻ Window #${win.id}`, win.getTitle());
