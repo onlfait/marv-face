@@ -12,9 +12,7 @@ module.exports = function create() {
     show: false,
     webPreferences: {
       devTools,
-      nodeIntegration: false,
-      contextIsolation: true,
-      worldSafeExecuteJavaScript: true,
+      nodeIntegration: true,
       preload: path.resolve(mainPath, "preload.js")
     }
   });
