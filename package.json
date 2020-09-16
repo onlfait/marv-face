@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@tensorflow-models/facemesh": "^0.0.4",
+    "@tensorflow-models/handpose": "^0.0.6",
+    "@tensorflow/tfjs-backend-cpu": "^2.4.0",
     "@tensorflow/tfjs-backend-wasm": "^2.3.0",
     "@tensorflow/tfjs-backend-webgl": "^2.3.0",
     "@tensorflow/tfjs-converter": "^2.3.0",

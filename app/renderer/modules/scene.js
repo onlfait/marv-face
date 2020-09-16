@@ -44,12 +44,48 @@ function createVideoPlan({ width, height, video } = {}) {
 function createMask(maxPoints) {
   const geometry = new THREE.BufferGeometry();
   const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
-  const texture = new THREE.VideoTexture(video);
   const buffer = new Float32Array(maxPoints * 3);
   const position = new THREE.BufferAttribute(buffer, 3);
   geometry.setAttribute("position", position);
   geometry.setDrawRange(0, maxPoints);
   return new THREE.Mesh(geometry, material);
+}
+
+function createFinger(maxPoints) {
+  const geometry = new THREE.BufferGeometry();
+  const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+  const buffer = new Float32Array(maxPoints * 3);
+  const position = new THREE.BufferAttribute(buffer, 3);
+  geometry.setAttribute("position", position);
+  geometry.setDrawRange(0, maxPoints);
+  return new THREE.Line(geometry, material);
+}
+
+function createHand() {
+  const group = new THREE.Group();
+  // const palmBase = createPalm()
+  const thumb = createFinger(4);
+  const indexFinger = createFinger(4);
+  const middleFinger = createFinger(4);
+  const ringFinger = createFinger(4);
+  const pinky = createFinger(4);
+
+  group.add(thumb);
+  group.add(indexFinger);
+  group.add(middleFinger);
+  group.add(ringFinger);
+  group.add(pinky);
+
+  return {
+    group,
+    annotations: {
+      thumb,
+      indexFinger,
+      middleFinger,
+      ringFinger,
+      pinky
+    }
+  };
 }
 
 function createScene({ width, height, video } = {}) {
@@ -88,4 +124,4 @@ function animate(callback) {
   renderer.render(scene, camera);
 }
 
-module.exports = { createScene, createMask, animate };
+module.exports = { createScene, createMask, createHand, animate };
