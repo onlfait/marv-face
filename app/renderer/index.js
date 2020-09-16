@@ -1,3 +1,5 @@
+// TODO -> https://rawcdn.githack.com/sciecode/three.js/f4e363a8e0cf6c496f4191192d7eb15110442a7c/examples/webgl_paint_texture.html
+
 const { cameraWatcher } = require("./modules/camera");
 const {
   createScene,
@@ -31,7 +33,8 @@ watcher.on("camera", async camera => {
     video: camera.video
   });
 
-  const mask = createMask(facemeshTris.length);
+  const uvs = facemesh.FaceMesh.getUVCoords();
+  const mask = createMask(facemeshTris.length, uvs);
   mask.position.set(size.width / 2, size.height / 2, 0);
 
   const hand = createHand();
@@ -110,6 +113,7 @@ function drawMask(mask, faces) {
   });
 
   position.needsUpdate = true;
+  geometry.uvsNeedUpdate = true;
   geometry.computeVertexNormals();
   geometry.computeBoundingSphere();
 }

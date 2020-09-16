@@ -41,13 +41,42 @@ function createVideoPlan({ width, height, video } = {}) {
   return new THREE.Mesh(geometry, material);
 }
 
-function createMask(maxPoints) {
+function createMask(maxPoints, uvs = []) {
+  const texture = new THREE.TextureLoader().load("textures/facemesh_map.jpg");
+  // texture.wrapS = THREE.RepeatWrapping;
+  // texture.wrapT = THREE.RepeatWrapping;
+  // texture.repeat.set(1, 1);
+
   const geometry = new THREE.BufferGeometry();
-  const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+  const material = new THREE.MeshPhongMaterial({
+    color: 0xdddddd,
+    specular: 0x222222,
+    shininess: 35,
+    map: texture
+  });
+
   const buffer = new Float32Array(maxPoints * 3);
   const position = new THREE.BufferAttribute(buffer, 3);
+
   geometry.setAttribute("position", position);
   geometry.setDrawRange(0, maxPoints);
+
+  geometry.faceVertexUvs = [[]];
+
+  for (let i = 0; i < uvs.length; i += 3) {
+    const a = uvs[i + 0];
+    const b = uvs[i + 1];
+    const c = uvs[i + 2];
+
+    geometry.faceVertexUvs[0].push([
+      new THREE.Vector2(a[0], a[1]),
+      new THREE.Vector2(b[0], b[1]),
+      new THREE.Vector2(c[0], c[1])
+    ]);
+  }
+
+  geometry.uvsNeedUpdate = true;
+
   return new THREE.Mesh(geometry, material);
 }
 
