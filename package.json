@@ -24,7 +24,7 @@
     "electron-context-menu": "^2.3.0",
     "electron-store": "^6.0.0",
     "events": "^3.2.0",
-    "three": "^0.120.1"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
