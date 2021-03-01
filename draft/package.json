@@ -13,7 +13,7 @@
     "@tensorflow/tfjs-converter": "^2.3.0",
     "@tensorflow/tfjs-core": "^2.3.0",
     "electron": "^10.1.1",
-    "three": "^0.120.1"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "chokidar": "^3.4.2"
